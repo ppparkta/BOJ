@@ -1,5 +1,6 @@
 from sys import stdin
 
+# sys.stdin.readline()이 input()보다 입력 속도 빠름
 for _ in range(3):
     num = int(stdin.readline())
     list = []
