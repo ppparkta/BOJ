@@ -1,31 +1,33 @@
-#include	<iostream>
-#include	<vector>
+#include <iostream>
 using namespace std;
+
+int t, n;
+
+int arr[1000001];
 
 int main()
 {
-	long long int T, N, current, max;
-	vector<int>v;
-	cin >> T;
-	while (T--)
+	cin >> t;
+	for (int i = 0; i < t; i++)
 	{
-		cin >> N;
-		current = 0;
-		for (int i = 0; i < N; i++)
+		cin >> n;
+
+		for (int j = 0; j < n; j++)
 		{
-			int n;
-			cin >> n;
-			v.push_back(n);
+			cin >> arr[j];
 		}
-		max = -1;
-		for (int i = N - 1; i >= 0; i--)
+		long tmp = 0;
+		long ans = 0;
+		for (int j = n - 1; j >= 0; j--)
 		{
-			if (max < v[i])
-				max = v[i];
-			current += max - v[i];
+			if (arr[j] > tmp)
+			{
+				tmp = arr[j];
+			}
+			else
+				ans += tmp - arr[j];
 		}
-		v.clear();
-		cout << current << '\n';
+		cout << ans << endl;
 	}
 	return 0;
 }
