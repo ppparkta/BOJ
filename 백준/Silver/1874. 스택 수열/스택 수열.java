@@ -1,44 +1,40 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.Stack;
 
 public class Main {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        List<Integer> arr = new ArrayList<>();
+        int[] arr = new int[100001];
         List<String> result = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            arr.add(sc.nextInt());
+            arr[i] = sc.nextInt();
         }
 
-        List<Integer> newArr = new ArrayList<>();
-        newArr.add(0);
+        Stack<Integer> stack = new Stack<>();
+        stack.push(0);
         int current = 0;
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < n; i++) {
-            Integer n1 = arr.get(i);
+            Integer n1 = arr[i];
             for (int cur = current + 1; cur <= n1; cur++) {
-                newArr.add(cur);
-                result.add("+");
+                stack.push(cur);
+                sb.append("+\n");
                 current++;
             }
-            boolean flag = false;
-            for (int cur = newArr.get(newArr.size() - 1); cur >= arr.get(i) && !flag; cur--) {
-                int tmp = newArr.get(newArr.size() - 1);
-                newArr.remove(newArr.size() - 1);
-                result.add("-");
-                if (tmp == arr.get(i)) {
-                    flag = true;
+            for (int cur = stack.get(stack.size() - 1); cur >= arr[i]; cur--) {
+                int tmp = stack.get(stack.size() - 1);
+                stack.pop();
+                sb.append("-\n");
+                if (tmp != arr[i]) {
+                    System.out.println("NO");
+                    return;
                 }
             }
-            if (flag) {
-                continue;
-            } else {
-                System.out.println("NO");
-                return;
-            }
         }
-        for (int i = 0; i < result.size(); i++) {
-            System.out.println(result.get(i));
-        }
+        System.out.println(sb);
     }
 }
