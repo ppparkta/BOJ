@@ -1,22 +1,26 @@
+//  평균
 import java.util.*;
- 
-public class Main {
-    
-	public static void main(String[] args) {
-		Scanner in = new Scanner(System.in);
-		double arr[] = new double[in.nextInt()];
-		
-		for(int i = 0; i < arr.length; i++) {
-			arr[i] = in.nextDouble();
-		}
-		in.close();
-		
-		double sum = 0;
-		Arrays.sort(arr);
-		
-		for(int i = 0; i < arr.length; i++) {
-			sum += ((arr[i] / arr[arr.length-1]) * 100);
-		}
-		System.out.print(sum / arr.length);
-	}
+import java.lang.*;
+import java.io.*;
+
+class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        double arr[] = new double[n];
+        int idx = 0;
+        while (st.hasMoreTokens()) {
+            arr[idx] = Double.parseDouble(st.nextToken());
+            idx++;
+        }
+        Arrays.sort(arr);
+        double max = arr[arr.length - 1];
+        double sum = 0;
+        for (int i = 0; i < n; i++) {
+            sum += ((arr[i] / max) * 100);
+        }
+        System.out.println(sum / n);
+    }
 }
