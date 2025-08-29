@@ -15,7 +15,7 @@ class Main {
         for (int i = 2; i <= n; i++) {
             arr[i] = i;
         }
-        for (int i = 2; i <= Math.sqrt(n); i++) {
+        for (int i = 2; i * i <= n; i++) {
             if (arr[i] == 0) {
                 continue;
             }
