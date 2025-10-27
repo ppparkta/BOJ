@@ -38,7 +38,8 @@ class Main {
                     continue;
                 }
                 if (arr[i][j] == 1) {
-                    bfs(i, j);
+                    int size = dfs(i, j);
+                    maxSize = maxSize < size ? size : maxSize;
                     answer++;
                 }
             }
@@ -71,5 +72,23 @@ class Main {
             }
         }
         maxSize = maxSize < buffer ? buffer : maxSize;
+    }
+
+    private static int dfs(int y, int x) {
+        visited[y][x] = true;
+        int answer = 1;
+        for (int i = 0; i < 4; i++) {
+            int ny = dy[i] + y;
+            int nx = dx[i] + x;
+            if (ny < 0 || ny >= n || nx < 0 || nx >= m) {
+                continue;
+            }
+            if (visited[ny][nx] == true || arr[ny][nx] == 0) {
+                continue;
+            }
+            visited[ny][nx] = true;
+            answer += dfs(ny, nx);
+        }
+        return answer;
     }
 }
