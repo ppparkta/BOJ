@@ -1,24 +1,22 @@
 class Solution {
-    
-    public static int[] arr;
-    public static int answer = 0;
-    
-    // dfs -> 같은 값에 대해가 아니라 무조건 뎁스 깊어야 함
+    public static boolean visited[];
+    public static int answer;
     public int solution(int[] numbers, int target) {
-        arr = numbers;
-        calcTarget(0, target, 0);
+        visited = new boolean[numbers.length];
+        answer = 0;
+        dfs(numbers, 0, 0, target);
         return answer;
     }
     
-    private void calcTarget(int d, int t, int cur){
-        // System.out.println(cur);
-        if (d == arr.length) {
-            if (cur == t){
+    private void dfs(int[] arr, int depth, int sum, int t) {
+        if (depth == arr.length) {
+            if (sum == t) {
                 answer++;
             }
             return;
         }
-        calcTarget(d+1, t, cur+arr[d]);
-        calcTarget(d+1, t, cur-arr[d]);
+        for(int i : new int[]{arr[depth], arr[depth] * -1}) {
+            dfs(arr, depth+1, sum+i, t);
+        }
     }
 }
