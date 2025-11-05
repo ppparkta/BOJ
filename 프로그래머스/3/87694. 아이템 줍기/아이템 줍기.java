@@ -19,11 +19,11 @@ class Solution {
         
         for(int i=0;i<101;i++){
             for(int j=0;j<101;j++){
-                line[i][j] = -1;
+                line[i][j] = 0;
             }
         }
         
-        // -1은 바깥, 0은 불가능, 1은 가능한 경로
+        // 0은 불가능, 1은 가능한 경로
         for(int i=0;i<rectangle.length;i++){
             int[] r = rectangle[i];
             int minx = r[0] * 2;
