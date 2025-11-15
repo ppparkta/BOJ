@@ -5,30 +5,24 @@ import java.lang.*;
 import java.io.*;
 
 class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
 
-        Deque<int[]> dq = new ArrayDeque<>();
-        dq.offer(new int[]{n, 0});
-        while (!dq.isEmpty()) {
-            int poll[] = dq.poll();
-            int cur = poll[0];
-            int sum = poll[1];
-            if (cur == 1) {
-                System.out.println(sum);
-                break;
-            }
-            if (cur < 1) {
-                continue;
-            }
-            if (cur % 3 == 0) {
-                dq.offer(new int[]{cur / 3, sum + 1});
-            }
-            if (cur % 2 == 0) {
-                dq.offer(new int[]{cur / 2, sum + 1});
-            }
-            dq.offer(new int[]{cur - 1, sum + 1});
+        int arr[] = new int[n + 1];
+        for (int i = 0; i <= n; i++) {
+            arr[i] = Integer.MAX_VALUE;
         }
+        arr[1] = 0;
+        for (int i = 2; i <= n; i++) {
+            arr[i] = arr[i - 1] + 1;
+            if (i % 3 == 0) {
+                arr[i] = Math.min(arr[i / 3] + 1, arr[i]);
+            }
+            if (i % 2 == 0) {
+                arr[i] = Math.min(arr[i / 2] + 1, arr[i]);
+            }
+        }
+        System.out.println(arr[n]);
     }
 }
